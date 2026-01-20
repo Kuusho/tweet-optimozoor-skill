@@ -1,0 +1,148 @@
+id: x-tweet-optimizer
+sharp_edges:
+
+  # Algorithm-specific pitfalls
+  - id: candidate-isolation-misunderstanding
+    severity: high
+    title: "Candidates can't see each other during ranking"
+    description: |
+      The Phoenix ranking model uses "special attention masking so candidates
+      cannot attend to each other." This means your tweet is scored in isolation.
+
+      IMPLICATION: Riding trending topics or quote-tweeting viral content
+      doesn't directly boost your score. Your content must stand alone.
+    trigger_patterns:
+      - "quote tweet this viral post"
+      - "hop on this trend"
+      - "ride the wave"
+    fix: |
+      Focus on intrinsic content quality. Trending topics help discovery
+      but don't inflate your ranking score directly.
+
+  - id: author-diversity-penalty
+    severity: high
+    title: "Posting frequency hurts individual post reach"
+    description: |
+      The Author Diversity Scorer "attenuates repeated author scores to ensure
+      feed diversity." Posting 10 tweets in an hour means each gets suppressed.
+    trigger_patterns:
+      - "let me post multiple times"
+      - "post a thread as separate tweets"
+      - "post every hour"
+    fix: |
+      Space out posts. Quality over quantity. A single banger beats
+      five mid tweets. Threads are fine (they're one unit), but
+      separate standalone posts should be spaced 2-4 hours apart.
+
+  - id: negative-signal-cascade
+    severity: critical
+    title: "Single report/block cascades harder than you think"
+    description: |
+      Negative signals (block, mute, report) carry very high negative weights.
+      The model learns from these signals across your entire account history.
+      One viral-for-bad-reasons tweet can tank future reach.
+    trigger_patterns:
+      - "controversial take"
+      - "rage bait"
+      - "make people angry"
+    fix: |
+      Controversy should make people reply, not block. Test: "Would someone
+      share this to their timeline?" vs "Would someone screenshot this
+      to mock you?" Only the first is good engagement.
+
+  - id: link-in-first-tweet-penalty
+    severity: medium
+    title: "External links reduce initial distribution"
+    description: |
+      Links trigger P(click) but also signal "this is promotional content"
+      which correlates with P(not_interested). The algorithm learned this pattern.
+    trigger_patterns:
+      - "check out my link"
+      - "link in tweet"
+      - "click here"
+    fix: |
+      Hook first, link later. Post the value-add tweet, let it gain
+      traction, then reply with the link. Or use "link in bio" only
+      after the content proves engaging.
+
+  - id: hashtag-spam-detection
+    severity: medium
+    title: "Multiple hashtags signal low-quality content"
+    description: |
+      The model has learned that tweets with 3+ hashtags correlate with
+      P(not_interested) and P(mute_author). Organic viral content rarely
+      uses hashtags because the content speaks for itself.
+    trigger_patterns:
+      - "#startup #entrepreneur #grind"
+      - "multiple hashtags"
+      - "add relevant hashtags"
+    fix: |
+      Zero to one hashtag max. If your content needs hashtags to be found,
+      the content isn't good enough. Hashtags are for joining specific
+      conversations, not for discovery.
+
+  - id: engagement-bait-detection
+    severity: high
+    title: "Explicit engagement requests backfire"
+    description: |
+      "RETWEET IF...", "Like if you agree", "Comment your thoughts" patterns
+      have been heavily trained as spam signals. They trigger P(not_interested)
+      and P(mute_author).
+    trigger_patterns:
+      - "retweet if"
+      - "like if you agree"
+      - "comment below"
+      - "share this"
+    fix: |
+      Create content that compels engagement naturally. A genuine question
+      gets replies. A hot take gets quote tweets. Never explicitly ask
+      for the engagement you want.
+
+  - id: dwell-without-payoff
+    severity: medium
+    title: "Dwell time only counts if there's a payoff"
+    description: |
+      Long tweets that don't deliver create a bad signal. The model detects
+      when users read a long post and then don't engage. This trains
+      P(not_interested) for bait-and-switch content.
+    trigger_patterns:
+      - "build up to nothing"
+      - "long for the sake of long"
+      - "pad the tweet"
+    fix: |
+      Information density matters. Every sentence should either create
+      tension or release it. If you can't justify a line's existence,
+      delete it.
+
+  # Voice and authenticity pitfalls
+  - id: corporate-speak-penalty
+    severity: medium
+    title: "Marketing language triggers mute patterns"
+    description: |
+      Phrases like "excited to announce", "thrilled to share", "game-changing"
+      pattern-match to promotional content that users have muted repeatedly.
+    trigger_patterns:
+      - "excited to announce"
+      - "thrilled to"
+      - "game-changing"
+      - "revolutionary"
+    fix: |
+      Write like a person texting a friend, not a press release.
+      "we shipped" > "excited to announce our launch"
+      "this changes everything" > "revolutionary new paradigm"
+
+  - id: over-optimization-uncanny-valley
+    severity: high
+    title: "Too optimized feels fake"
+    description: |
+      Content that hits every optimization checkbox but lacks authentic voice
+      triggers P(not_interested). Users have developed immunity to
+      perfectly-structured viral bait.
+    trigger_patterns:
+      - "perfect hook formula"
+      - "every viral trick"
+      - "optimization checklist"
+    fix: |
+      Optimize structure, keep voice authentic. The best viral content
+      breaks one rule on purpose. Leave a deliberate imperfection
+      that feels human.

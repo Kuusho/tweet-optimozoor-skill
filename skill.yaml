@@ -1,0 +1,103 @@
+id: x-tweet-optimizer
+name: X Tweet Optimizer
+version: 1.0.0
+category: marketing
+
+description: |
+  Transforms draft tweets into algorithm-optimized content using real X/Twitter
+  ranking signals from the open-sourced algorithm. Takes raw ideas, sentences,
+  or drafts and rewrites them to maximize the weighted engagement score while
+  avoiding negative signals.
+
+# Based on: https://github.com/xai-org/x-algorithm
+algorithm_source: xai-org/x-algorithm (Apache-2.0)
+
+triggers:
+  - "optimize tweet"
+  - "viral tweet"
+  - "rewrite tweet"
+  - "make this tweet better"
+  - "improve my post"
+  - "x algorithm"
+  - "twitter algorithm"
+  - "make it viral"
+
+owns:
+  - tweet optimization
+  - x algorithm scoring
+  - viral content rewriting
+  - engagement signal maximization
+
+input_types:
+  - raw_idea: "A rough concept or topic"
+  - draft_tweet: "An existing tweet that needs improvement"
+  - thread_outline: "Multiple connected points to optimize as a thread"
+
+output_format:
+  analysis: "Breakdown of current engagement signals"
+  versions:
+    - hook_focused: "Optimized for pattern interrupt and curiosity"
+    - reply_maximizing: "Optimized for conversation triggers"
+    - repost_optimizing: "Optimized for shareability and identity reinforcement"
+  recommendation: "Best version with reasoning"
+  strategy: "Posting timing, media, and follow-up plays"
+
+# Core algorithm understanding
+algorithm_model:
+  name: "Grok-based transformer (Phoenix component)"
+  scoring: "Final Score = Σ (weight_i × P(action_i))"
+
+  positive_signals:
+    - action: like
+      weight: high
+      description: "Immediate resonance indicator"
+    - action: reply
+      weight: high
+      description: "Conversation trigger - drives extended engagement"
+    - action: repost
+      weight: very_high
+      description: "Network amplification signal"
+    - action: quote
+      weight: very_high
+      description: "Content worth adding commentary to"
+    - action: click
+      weight: medium
+      description: "Curiosity engagement"
+    - action: dwell_time
+      weight: medium
+      description: "Scroll-stopping power"
+    - action: share
+      weight: high
+      description: "Off-platform distribution"
+    - action: follow_author
+      weight: very_high
+      description: "Author quality signal"
+
+  negative_signals:
+    - action: not_interested
+      weight: negative_medium
+      description: "Irrelevance or low quality"
+    - action: block_author
+      weight: negative_very_high
+      description: "Spam or harassment indicator"
+    - action: mute_author
+      weight: negative_high
+      description: "Annoyance or over-posting"
+    - action: report
+      weight: negative_critical
+      description: "Policy violation signal"
+
+  diversity_factor: |
+    Author Diversity Scorer attenuates repeated author scores.
+    Posting too frequently hurts individual post reach.
+
+tags:
+  - twitter
+  - x
+  - social-media
+  - viral
+  - engagement
+  - algorithm
+  - marketing
+  - content-optimization
+  - grok
