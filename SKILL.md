@@ -164,7 +164,7 @@ For every input, provide this structured analysis and rewrites:
 
 **STRONG:**
 ```
-6 months ago we mass-deleted our codebase and mass-resigned the team.
+6 months ago we deleted our codebase and resigned the team.
 
 today we shipped.
 
@@ -184,7 +184,7 @@ the product that almost killed us is now live.
 
 **STRONG:**
 ```
-I mass-mass-mass-mass-spent 4 months building a product.
+I spent 4 months building a product.
 
 0 customers talked to.
 0 users at launch.
@@ -209,7 +209,7 @@ I'm telling you why.
 
 **STRONG:**
 ```
-Coding bootcamps are the most expensive way to mass-learn things that are free online.
+Coding bootcamps are the most expensive way to learn things that are free online.
 
 $15,000 for:
 - YouTube tutorials (free)
